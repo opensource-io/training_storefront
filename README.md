@@ -15,6 +15,6 @@ API available as JSON at:
 
 Application entrypoint at:
 
-http://localhost:8080/
+`http://localhost:8080/`
 
 Links provided via HAL specification of HATEOAS
