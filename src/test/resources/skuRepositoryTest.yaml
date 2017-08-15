@@ -1,0 +1,4 @@
+test:
+  rigs:
+    skuEntities:
+      testValue: success
