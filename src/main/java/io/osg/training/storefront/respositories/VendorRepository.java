@@ -14,12 +14,7 @@ import java.util.Set;
 @RepositoryRestResource(collectionResourceRel = "vendors", path = "vendors")
 public interface VendorRepository extends JpaRepository<VendorEntity, Integer> {
 
-    /**
-     *
-     * @param vendorName
-     * @return
-     */
-    Set<VendorEntity> getVendorByVendorNameContainsIgnoreCase(@Param("vendorName") final String vendorName);
+    Set<VendorEntity> findByVendorNameContainsIgnoreCase(@Param("vendorName") final String vendorName);
 
     List<VendorEntity> findAllByOrderByVendorKeyAsc();
 

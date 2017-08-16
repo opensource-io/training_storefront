@@ -63,7 +63,7 @@ public class VendorRepositoryTests {
 
             for(String testSearchCriterion : testSearchCriteria){
 
-                Set<VendorEntity> searchResultsToTest = vendorRepository.getVendorByVendorNameContainsIgnoreCase(testSearchCriterion);
+                Set<VendorEntity> searchResultsToTest = vendorRepository.findByVendorNameContainsIgnoreCase(testSearchCriterion);
 
                 for(VendorEntity searchResultToTest : searchResultsToTest){
                     assert Pattern.compile(Pattern.quote(testSearchCriterion), Pattern.CASE_INSENSITIVE).matcher(searchResultToTest.getVendorName()).find();
