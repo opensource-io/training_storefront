@@ -1,0 +1,102 @@
+spring:
+  profiles: "development"
+server:
+  address: "localhost"
+  port: 8080
+test:
+  rigs:
+    skuEntitiesRig:
+      testTable: "TRAINING_STOREFRONT.SKUS"
+      testColumns:
+        - "SKU_KEY"
+        - "VENDOR_KEY"
+        - "VENDOR_SKU_CODE"
+        - "SKU_NAME"
+        - "SKU_DESCRIPTION"
+      newSkuQuery: 'SELECT SKU_KEY, VENDOR_KEY, VENDOR_SKU_CODE, SKU_NAME, SKU_DESCRIPTION FROM TRAINING_STOREFRONT.SKUS AS S WHERE S.SKU_KEY = ?'
+      newSku:
+        skuKey: 99
+        vendorSkuCode: "OSG-002-001"
+        skuName: "OSG Test Class"
+        skuDescription: "An OSG test class for testing the storefront."
+        skuVendor:
+          vendorKey: 1
+      skuEntitiesMap:
+        1:
+          skuKey: 1
+          vendorSkuCode: "OSG-001-001"
+          skuName: "1 Unit of OSG Training."
+          skuDescription: "A single unit of OSG training to be redeemed to attend a class."
+          skuVendor:
+            vendorKey: 1
+        2:
+          skuKey: 2
+          vendorSkuCode: "RHT001"
+          skuName: "1 Unit of Red Hat Training."
+          skuDescription: "A single unit of Red Hat training to be redeemed to attend a class."
+          skuVendor:
+            vendorKey: 2
+        3:
+          skuKey: 3
+          vendorSkuCode: "PIV-001-001"
+          skuName: "1 Unit of Pivotal Training."
+          skuDescription: "A single unit of Pivotal training to be redeemed to attend a class."
+          skuVendor:
+            vendorKey: 3
+        4:
+          skuKey: 4
+          vendorSkuCode: "CLB-001-001"
+          skuName: "1 Unit of Cloudbees Training."
+          skuDescription: "A single unit of Cloudbees training to be redeemed to attend a class."
+          skuVendor:
+            vendorKey: 3
+        5:
+          skuKey: 5
+          vendorSkuCode: "OSG-001-002"
+          skuName: "2 Units of OSG Training."
+          skuDescription: "Two units of OSG training to be redeemed to attend a class."
+          skuVendor:
+            vendorKey: 1
+        6:
+          skuKey: 6
+          vendorSkuCode: "RHT002"
+          skuName: "2 Units of Red Hat Training."
+          skuDescription: "Two units of Red Hat training to be redeemed to attend a class."
+          skuVendor:
+            vendorKey: 2
+        7:
+          skuKey: 7
+          vendorSkuCode: "PIV-001-002"
+          skuName: "2 Units of Pivotal Training."
+          skuDescription: "Two units of Pivotal training to be redeemed to attend a class."
+          skuVendor:
+            vendorKey: 3
+        8:
+          skuKey: 8
+          vendorSkuCode: "CLB-001-002"
+          skuName: "2 Units of Cloudbees Training."
+          skuDescription: "Two units of Cloudbees training to be redeemed to attend a class."
+          skuVendor:
+            vendorKey: 3
+    vendorEntitiesRig:
+      testTable: "TRAINING_STOREFRONT.VENDORS"
+      testColumns:
+        - "VENDOR_KEY"
+        - "VENDOR_NAME"
+      newVendorQuery: 'SELECT VENDOR_KEY, VENDOR_NAME FROM TRAINING_STOREFRONT.VENDORS AS V WHERE V.VENDOR_KEY = ?'
+      newVendor:
+        vendorKey: 99
+        vendorName: "Test Vendor"
+      vendorEntitiesMap:
+        1:
+          vendorKey: 1
+          vendorName: "Open Source Group"
+        2:
+          vendorKey: 2
+          vendorName: "Red Hat"
+        3:
+          vendorKey: 3
+          vendorName: "Pivotal"
+        4:
+          vendorKey: 4
+          vendorName: "Cloudbees"

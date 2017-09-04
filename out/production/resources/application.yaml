@@ -1,0 +1,23 @@
+service:
+  name:
+server:
+  address: localhost
+  port: 8080
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /api
+
+spring:
+  profiles: postgresql
+  datasource:
+    url: jdbc:postgresql://localhost:5432/storefront-db
+    username: storefront
+    password: $70r3fr0n7
+    platform: POSTGRESQL
+    schemaName: TRAINING_STOREFRONT
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
