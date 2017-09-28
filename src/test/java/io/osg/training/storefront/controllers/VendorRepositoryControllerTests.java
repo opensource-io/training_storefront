@@ -1,19 +1,31 @@
 package io.osg.training.storefront.controllers;
 
+import io.osg.training.storefront.model.entities.VendorEntity;
 import io.osg.training.storefront.model.entities.VendorEntityTestRig;
 import io.osg.training.storefront.respositories.VendorRepository;
 import org.junit.Test;
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultHandler;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import javax.sql.DataSource;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -29,25 +41,24 @@ public class VendorRepositoryControllerTests {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    @Qualifier("dataSource")
+    private DataSource dataSource;
+
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private VendorEntityTestRig vendorEntityTestRig;
 
-    @Autowired
-    private VendorRepository vendorRepository;
+    /*@Autowired
+    private VendorRepository vendorRepository;*/
 
     String path;
 
-    @Test
-    public void assertTrueTest(){
-        assert true;
-    }
-
-    /*@Before
+    @Before
     public void setup(){
-        vendorEntityTestRig.intializeDbWithVendors();
+        vendorEntityTestRig.initializeDbWithVendors(dataSource, vendorEntityTestRig.getTestTable(), vendorEntityTestRig.getTestColumns(), vendorEntityTestRig.getVendorEntitiesMap());
 
-        try {
+        /*try {
             logger.info("*****");
             mockMvc.perform(get("/")).andDo(print());
 
@@ -68,10 +79,29 @@ public class VendorRepositoryControllerTests {
             e.printStackTrace();
         }
 
-        path = "/" + VendorRepository.class.getAnnotation(RepositoryRestResource.class).path();
-    }*/
+        path = "/" + VendorRepository.class.getAnnotation(RepositoryRestResource.class).path();*/
+    }
 
+    @Test
+    public void findAllVendorsTest(){
 
+        List<String> vendorNames = new ArrayList<String>();
+
+        for(VendorEntity vendorEntity : vendorEntityTestRig.getVendorEntitiesMap().values()){
+            vendorNames.add(vendorEntity.getVendorName());
+        }
+
+        try {
+            //http://localhost:8080/vendors/search/getVendorByVendorNameContainsIgnoreCase?vendorName=red%20hat
+            mockMvc.perform(get("/vendors"))
+                    .andExpect(MockMvcResultMatchers.status().isOk())
+                    .andExpect(MockMvcResultMatchers.jsonPath("_embedded.vendors",hasSize(vendorEntityTestRig.getVendorEntitiesMap().size())))
+                    .andExpect(MockMvcResultMatchers.jsonPath("_embedded.vendors[*].vendorName", containsInAnyOrder(vendorNames.toArray())))
+                    .andDo(print());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /*@Test
     public void findVendorByIdTest(){
@@ -99,14 +129,5 @@ public class VendorRepositoryControllerTests {
             }
         }
 
-    }*/
-
-    /*@Test
-    public void findAllVendorsTest(){
-        try {
-            mockMvc.perform(get(path + "/" + "/all")).andDo(print());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }*/
 }
