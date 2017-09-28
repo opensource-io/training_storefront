@@ -1,8 +1,5 @@
 spring:
   profiles: "development"
-server:
-  address: "localhost"
-  port: 8080
 test:
   rigs:
     skuEntitiesRig:
