@@ -30,6 +30,10 @@ public class SkuEntity {
     @NotNull
     private String skuDescription;
 
+    @Column(name="CLASS_LENGTH")
+    @NotNull
+    private String classLength;
+
     @Autowired
     @ManyToOne
     @JoinColumn(name="VENDOR_KEY")
@@ -68,6 +72,10 @@ public class SkuEntity {
         this.skuDescription = skuDescription;
     }
 
+    public void setClassLength(String classLength) { this.classLength = classLength; }
+
+    public String getClassLength() { return classLength; }
+
     public VendorEntity getSkuVendor() {
         return skuVendor;
     }
@@ -84,6 +92,7 @@ public class SkuEntity {
                 ", skuName='" + skuName + '\'' +
                 ", skuDescription='" + skuDescription + '\'' +
                 ", skuVendor=" + skuVendor.toString() +
+                ", classLength=" + classLength +
                 '}';
     }
 

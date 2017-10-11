@@ -25,7 +25,7 @@ public class ClassSessionEntity {
     @ManyToOne
     @JoinColumn(name="SKU_KEY")
     @NotNull
-    private SkuEntity classSku;
+    private SkuEntity classSessionSku;
 
     @Autowired
     @ManyToOne
@@ -33,13 +33,35 @@ public class ClassSessionEntity {
     @NotNull
     private AddressEntity classSessionAddress;
 
-    @Autowired
+    public Integer getClassSessionKey() {
+        return  classSessionKey;
+    }
+
+    public void setClassSessionKey(Integer classSessionKey) {
+        this.classSessionKey = classSessionKey;
+    }
+
+    public SkuEntity getClassSessionSku() {
+        return classSessionSku;
+    }
+
+    public void setClassSessionSku(SkuEntity classSku) {
+        this.classSessionSku = classSessionSku;
+    }
+
+    public AddressEntity getClassSessionAddress() {
+        return classSessionAddress;
+    }
+
+    public void setClassSessionAddress(AddressEntity classSessionAddress) { this.classSessionAddress = classSessionAddress; }
+
+    /*@Autowired
     @ManyToOne
     @JoinColumn(name="INSTRUCTOR_KEY")
     @NotNull
     private InstructorEntity classSessionInstructor;
 
-    @Columns(columns={@Column(name="CLASS_SESSION_STARTTIME"), @Column(name="CLASS_SESSION_START_TIMEZONE")})
+    Columns(columns={@Column(name="CLASS_SESSION_STARTTIME"), @Column(name="CLASS_SESSION_START_TIMEZONE")})
     @Type(type="org.joda.time.contrib.hibernate.PersistentDateTimeTZ")
     @NotNull
     private DateTime classSessionStartDate;
@@ -51,5 +73,5 @@ public class ClassSessionEntity {
 
     @Column(name="CLASS_SESSION_TIMEZONE")
     @NotNull
-    private String classSessionTimeZone;
+    private String classSessionTimeZone;*/
 }
