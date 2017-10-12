@@ -32,7 +32,7 @@ public class SkuEntity {
 
     @Column(name="CLASS_LENGTH")
     @NotNull
-    private String classLength;
+    private Integer classLength;
 
     @Autowired
     @ManyToOne
@@ -72,9 +72,9 @@ public class SkuEntity {
         this.skuDescription = skuDescription;
     }
 
-    public void setClassLength(String classLength) { this.classLength = classLength; }
+    public void setClassLength(Integer classLength) { this.classLength = classLength; }
 
-    public String getClassLength() { return classLength; }
+    public Integer getClassLength() { return classLength; }
 
     public VendorEntity getSkuVendor() {
         return skuVendor;

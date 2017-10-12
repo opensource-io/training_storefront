@@ -33,6 +33,17 @@ public class ClassSessionEntity {
     @NotNull
     private AddressEntity classSessionAddress;
 
+    @Column(name="CLASS_SESSION_STARTTIME")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime classSessionStartDate;
+
+    @Column(name="CLASS_SESSION_ENDTIME")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime classSessionEndDate;
+
+    @Column(name="CLASS_SESSION_TIMEZONE")
+    private String classSessionTimeZone;
+
     public Integer getClassSessionKey() {
         return  classSessionKey;
     }
@@ -55,23 +66,27 @@ public class ClassSessionEntity {
 
     public void setClassSessionAddress(AddressEntity classSessionAddress) { this.classSessionAddress = classSessionAddress; }
 
-    /*@Autowired
-    @ManyToOne
-    @JoinColumn(name="INSTRUCTOR_KEY")
-    @NotNull
-    private InstructorEntity classSessionInstructor;
+    public String getClassSessionStartDate() {
+        return classSessionStartDate.toString("MM/dd/yyyy HH:mm:ss");
+    }
 
-    Columns(columns={@Column(name="CLASS_SESSION_STARTTIME"), @Column(name="CLASS_SESSION_START_TIMEZONE")})
-    @Type(type="org.joda.time.contrib.hibernate.PersistentDateTimeTZ")
-    @NotNull
-    private DateTime classSessionStartDate;
+    public void setClassSessionStartDate(DateTime dateTime) {
+        this.classSessionStartDate = classSessionStartDate;
+    }
 
-    @Columns(columns={@Column(name="CLASS_SESSION_ENDTIME"), @Column(name="CLASS_SESSION_END_TIMEZONE")})
-    @Type(type="org.joda.time.contrib.hibernate.PersistentDateTimeTZ")
-    @NotNull
-    private DateTime classSessionEndDate;
+    public String getClassSessionEndDate() {
+        return classSessionEndDate.toString("MM/dd/yyyy HH:mm:ss");
+    }
 
-    @Column(name="CLASS_SESSION_TIMEZONE")
-    @NotNull
-    private String classSessionTimeZone;*/
+    public void setClassSessionEndDate(DateTime dateTime) {
+        this.classSessionEndDate = classSessionEndDate;
+    }
+
+    public String getClassSessionTimeZone() {
+        return classSessionTimeZone;
+    }
+
+    public void setClassSessionTimeZone(String classSessionTimeZone) {
+        this.classSessionTimeZone = classSessionTimeZone;
+    }
 }
