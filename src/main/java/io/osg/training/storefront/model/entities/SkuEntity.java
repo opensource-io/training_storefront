@@ -107,6 +107,7 @@ public class SkuEntity {
         if (!getVendorSkuCode().equals(skuEntity.getVendorSkuCode())) return false;
         if (!getSkuName().equals(skuEntity.getSkuName())) return false;
         if (!getSkuDescription().equals(skuEntity.getSkuDescription())) return false;
+        if (!getClassLength().equals(skuEntity.getClassLength())) return false;
         return getSkuVendor().equals(skuEntity.getSkuVendor());
     }
 

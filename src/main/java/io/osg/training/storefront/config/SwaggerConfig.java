@@ -3,14 +3,12 @@ package io.osg.training.storefront.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import springfox.documentation.builders.RequestHandlerSelectors;
+
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import static springfox.documentation.builders.PathSelectors.regex;
 
 @Configuration
 @EnableSwagger2
@@ -25,20 +23,19 @@ public class SwaggerConfig {
                 //.apis(RequestHandlerSelectors.basePackage("io.osg.training.storefront"))
                 //.paths(regex("/*"))
                 .build()
-                //.apiInfo(metaData())
+                .apiInfo(metaData())
         ;
     }
 
     private ApiInfo metaData() {
-        ApiInfo apiInfo;
-        apiInfo = new ApiInfo(
-                "Spring Boot REST API",
-                "Spring Boot REST API for Online Store",
-                "1.0",
-                "Terms of service",
-                new Contact("John Thompson", "https://springframework.guru/about/", "john@springfrmework.guru").getName(),
-                "Apache License Version 2.0",
-                "https://www.apache.org/licenses/LICENSE-2.0");
+        ApiInfo apiInfo = new ApiInfoBuilder()
+        		.title("Training Storefront API")
+        		.description("Services for maintaining a training class schedule")
+        		.termsOfServiceUrl("https://github.com/opensource-io/training_storefront")
+        		.license("AGPLv3")
+        		.licenseUrl("https://github.com/opensource-io/training_storefront/blob/master/LICENSE")
+        		.version("1.0.0")
+        		.build();
         return apiInfo;
     }
 }

@@ -199,6 +199,7 @@ public class SkuEntityTestRig extends AbstractTestRig {
             skuEntity.setVendorSkuCode(rs.getString(testColumnsIterator.next()));
             skuEntity.setSkuName(rs.getString(testColumnsIterator.next()));
             skuEntity.setSkuDescription(rs.getString(testColumnsIterator.next()));
+            skuEntity.setClassLength(rs.getInt(testColumnsIterator.next()));
 
             return skuEntity;
         }

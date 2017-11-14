@@ -33,7 +33,7 @@ server:
 spring:
   profiles: postgresql
   datasource:
-    url: jdbc:postgresql://localhost:5432/storefront-db
+    url: jdbc:postgresql://localhost:5432/storefrontdb
     username: storefront
     password: $70r3fr0n7
     platform: POSTGRESQL

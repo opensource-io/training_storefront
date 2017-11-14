@@ -10,12 +10,14 @@ test:
         - "VENDOR_SKU_CODE"
         - "SKU_NAME"
         - "SKU_DESCRIPTION"
-      newSkuQuery: 'SELECT SKU_KEY, VENDOR_KEY, VENDOR_SKU_CODE, SKU_NAME, SKU_DESCRIPTION FROM TRAINING_STOREFRONT.SKUS AS S WHERE S.SKU_KEY = ?'
+        - "CLASS_LENGTH"
+      newSkuQuery: 'SELECT SKU_KEY, VENDOR_KEY, VENDOR_SKU_CODE, SKU_NAME, SKU_DESCRIPTION, CLASS_LENGTH FROM TRAINING_STOREFRONT.SKUS AS S WHERE S.SKU_KEY = ?'
       newSku:
         skuKey: 99
         vendorSkuCode: "OSG-002-001"
         skuName: "OSG Test Class"
         skuDescription: "An OSG test class for testing the storefront."
+        classLength: 3
         skuVendor:
           vendorKey: 1
       skuEntitiesMap:
@@ -24,6 +26,7 @@ test:
           vendorSkuCode: "OSG-001-001"
           skuName: "1 Unit of OSG Training."
           skuDescription: "A single unit of OSG training to be redeemed to attend a class."
+          classLength: 4
           skuVendor:
             vendorKey: 1
         2:
@@ -31,6 +34,7 @@ test:
           vendorSkuCode: "RHT001"
           skuName: "1 Unit of Red Hat Training."
           skuDescription: "A single unit of Red Hat training to be redeemed to attend a class."
+          classLength: 2
           skuVendor:
             vendorKey: 2
         3:
@@ -38,6 +42,7 @@ test:
           vendorSkuCode: "PIV-001-001"
           skuName: "1 Unit of Pivotal Training."
           skuDescription: "A single unit of Pivotal training to be redeemed to attend a class."
+          classLength: 4
           skuVendor:
             vendorKey: 3
         4:
@@ -45,6 +50,7 @@ test:
           vendorSkuCode: "CLB-001-001"
           skuName: "1 Unit of Cloudbees Training."
           skuDescription: "A single unit of Cloudbees training to be redeemed to attend a class."
+          classLength: 4
           skuVendor:
             vendorKey: 3
         5:
@@ -52,6 +58,7 @@ test:
           vendorSkuCode: "OSG-001-002"
           skuName: "2 Units of OSG Training."
           skuDescription: "Two units of OSG training to be redeemed to attend a class."
+          classLength: 2
           skuVendor:
             vendorKey: 1
         6:
@@ -59,6 +66,7 @@ test:
           vendorSkuCode: "RHT002"
           skuName: "2 Units of Red Hat Training."
           skuDescription: "Two units of Red Hat training to be redeemed to attend a class."
+          classLength: 3
           skuVendor:
             vendorKey: 2
         7:
@@ -66,6 +74,7 @@ test:
           vendorSkuCode: "PIV-001-002"
           skuName: "2 Units of Pivotal Training."
           skuDescription: "Two units of Pivotal training to be redeemed to attend a class."
+          classLength: 4
           skuVendor:
             vendorKey: 3
         8:
@@ -73,6 +82,7 @@ test:
           vendorSkuCode: "CLB-001-002"
           skuName: "2 Units of Cloudbees Training."
           skuDescription: "Two units of Cloudbees training to be redeemed to attend a class."
+          classLength: 3
           skuVendor:
             vendorKey: 3
     vendorEntitiesRig:
