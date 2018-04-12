@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -16,6 +18,7 @@ import javax.validation.constraints.NotNull;
 public class InstructorEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="INSTRUCTOR_KEY")
     @NotNull
     private Integer instructorKey;
@@ -66,7 +69,7 @@ public class InstructorEntity {
 
     @Override
     public int hashCode() {
-        int result = getInstructorKey().hashCode();
+        int result = (getInstructorKey() != null ? getInstructorKey().hashCode() : 0);
         result = 31 * result + getInstructorName().hashCode();
         result = 31 * result + getInstructorEmail().hashCode();
         return result;

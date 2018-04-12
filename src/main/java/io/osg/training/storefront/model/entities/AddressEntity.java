@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -16,12 +18,11 @@ import javax.validation.constraints.NotNull;
 public class AddressEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ADDRESS_KEY")
-    @NotNull
     private Integer addressKey;
 
     @Column(name="ADDRESS_LINE_1")
-    @NotNull
     private String addressLine1;
 
     @Column(name="ADDRESS_LINE_2")
@@ -36,7 +37,6 @@ public class AddressEntity {
     private String countrySubdivision;
 
     @Column(name="POSTAL_CODE")
-    @NotNull
     private String postalCode;
 
     public Integer getAddressKey() {
@@ -105,35 +105,44 @@ public class AddressEntity {
 
     @Override
     public int hashCode() {
-        int result = getAddressKey().hashCode();
-        result = 31 * result + getAddressLine1().hashCode();
+        int result = (getAddressKey() != null ? getAddressKey().hashCode() : 0);
+        result = 31 * result + (getAddressLine1() != null ? getAddressLine1().hashCode() : 0);
         result = 31 * result + (getAddressLine2() != null ? getAddressLine2().hashCode() : 0);
         result = 31 * result + getCity().hashCode();
         result = 31 * result + getCountrySubdivision().hashCode();
-        result = 31 * result + getPostalCode().hashCode();
+        result = 31 * result + (getPostalCode() != null ? getPostalCode().hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        if(addressLine2 != null) {
-            return "Address{" +
-                    "addressKey=" + addressKey +
-                    ", addressLine1='" + addressLine1 + '\'' +
-                    ", addressLine2='" + addressLine2 + '\'' +
-                    ", city='" + city + '\'' +
-                    ", countrySubdivision='" + countrySubdivision + '\'' +
-                    ", postalCode='" + postalCode + '\'' +
-                    '}';
-        }else{
-            return "Address{" +
-                    "addressKey=" + addressKey +
-                    ", addressLine1='" + addressLine1 + '\'' +
-                    ", city='" + city + '\'' +
-                    ", countrySubdivision='" + countrySubdivision + '\'' +
-                    ", postalCode='" + postalCode + '\'' +
-                    '}';
-        }
-
+    		StringBuilder b = new StringBuilder();
+    		b.append("Address{");
+    		b.append("addressKey=");
+    		b.append(getAddressKey());
+		b.append("'");
+    		if (getAddressLine1() != null) {
+    			b.append(", addressLine1='");
+    			b.append(getAddressLine1());
+    			b.append("'");
+    		}
+    		if (getAddressLine2() != null) {
+    			b.append(", addressLine2='");
+    			b.append(getAddressLine2());
+    			b.append("'");
+    		}
+    		b.append(", city='");
+    		b.append(getCity());
+		b.append("'");
+    		b.append(", countrySubdivision='");
+    		b.append(getCountrySubdivision());
+		b.append("'");
+    		if (getPostalCode() != null) {
+    			b.append(", postalCode='");
+    			b.append(getPostalCode());
+    			b.append("'");
+    		}
+    		b.append("}");
+    		return b.toString();
     }
 }

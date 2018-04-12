@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -16,8 +18,8 @@ import javax.validation.constraints.NotNull;
 public class VendorEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="VENDOR_KEY")
-    @NotNull
     private Integer vendorKey;
 
     @Column(name="VENDOR_NAME")
@@ -61,7 +63,7 @@ public class VendorEntity {
 
     @Override
     public int hashCode() {
-        int result = getVendorKey().hashCode();
+        int result = (getVendorKey() != null ? getVendorKey().hashCode() : 0);
         result = 31 * result + getVendorName().hashCode();
         return result;
     }

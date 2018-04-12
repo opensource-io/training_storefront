@@ -1,14 +1,21 @@
 package io.osg.training.storefront.model.entities;
 
-import org.hibernate.annotations.Columns;
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Component
@@ -17,8 +24,8 @@ import javax.validation.constraints.NotNull;
 public class ClassSessionEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="CLASS_SESSION_KEY")
-    @NotNull
     private Integer classSessionKey;
 
     @Autowired
@@ -32,18 +39,24 @@ public class ClassSessionEntity {
     @JoinColumn(name="ADDRESS_KEY")
     @NotNull
     private AddressEntity classSessionAddress;
+    
+    @Autowired
+    @ManyToOne
+    @JoinColumn(name="INSTRUCTOR_KEY")
+    private InstructorEntity classSessionInstructor;
 
+    @Column(name="CLASS_SESSION_STARTDATE")
+    private LocalDate classSessionStartDate;
+    
     @Column(name="CLASS_SESSION_STARTTIME")
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime classSessionStartDate;
+    private LocalTime classSessionStartTime;
 
     @Column(name="CLASS_SESSION_ENDTIME")
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime classSessionEndDate;
+    private LocalTime classSessionEndTime;
 
     @Column(name="CLASS_SESSION_TIMEZONE")
     private String classSessionTimeZone;
-
+    
     public Integer getClassSessionKey() {
         return  classSessionKey;
     }
@@ -57,29 +70,47 @@ public class ClassSessionEntity {
     }
 
     public void setClassSessionSku(SkuEntity classSku) {
-        this.classSessionSku = classSessionSku;
+        this.classSessionSku = classSku;
     }
 
     public AddressEntity getClassSessionAddress() {
         return classSessionAddress;
     }
 
-    public void setClassSessionAddress(AddressEntity classSessionAddress) { this.classSessionAddress = classSessionAddress; }
-
-    public String getClassSessionStartDate() {
-        return classSessionStartDate.toString("MM/dd/yyyy HH:mm:ss");
+    public void setClassSessionAddress(AddressEntity classSessionAddress) {
+    		this.classSessionAddress = classSessionAddress;
+	}
+    
+    public InstructorEntity getClassSessionInstructor() {
+        return classSessionInstructor;
     }
 
-    public void setClassSessionStartDate(DateTime dateTime) {
-        this.classSessionStartDate = classSessionStartDate;
+    public void setClassSessionInstructor(InstructorEntity classSessionInstructor) {
+    		this.classSessionInstructor = classSessionInstructor;
+	}
+    
+    public LocalDate getClassSessionStartDate() {
+        return classSessionStartDate;
     }
 
-    public String getClassSessionEndDate() {
-        return classSessionEndDate.toString("MM/dd/yyyy HH:mm:ss");
+    public void setClassSessionStartDate(LocalDate dateTime) {
+        this.classSessionStartDate = dateTime;
+    }
+    
+    public LocalTime getClassSessionStartTime() {
+        return classSessionStartTime;
     }
 
-    public void setClassSessionEndDate(DateTime dateTime) {
-        this.classSessionEndDate = classSessionEndDate;
+    public void setClassSessionStartTime(LocalTime startTime) {
+        this.classSessionStartTime = startTime;
+    }
+    
+    public LocalTime getClassSessionEndTime() {
+        return classSessionEndTime;
+    }
+
+    public void setClassSessionEndTime(LocalTime endTime) {
+        this.classSessionEndTime = endTime;
     }
 
     public String getClassSessionTimeZone() {

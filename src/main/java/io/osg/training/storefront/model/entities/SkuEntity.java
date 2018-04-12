@@ -14,8 +14,8 @@ import javax.validation.constraints.NotNull;
 public class SkuEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="SKU_KEY")
-    @NotNull
     private Integer skuKey;
 
     @Column(name="VENDOR_SKU_CODE")
@@ -27,7 +27,6 @@ public class SkuEntity {
     private String skuName;
 
     @Column(name="SKU_DESCRIPTION")
-    @NotNull
     private String skuDescription;
 
     @Column(name="CLASS_LENGTH")
@@ -113,10 +112,10 @@ public class SkuEntity {
 
     @Override
     public int hashCode() {
-        int result = getSkuKey().hashCode();
+        int result = (getSkuKey() != null ? getSkuKey().hashCode() : 0);
         result = 31 * result + getVendorSkuCode().hashCode();
         result = 31 * result + getSkuName().hashCode();
-        result = 31 * result + getSkuDescription().hashCode();
+        result = 31 * result + (getSkuDescription() != null ? getSkuDescription().hashCode() : 0);
         //result = 31 * result + getSkuVendor().hashCode();
         return result;
     }
